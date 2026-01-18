@@ -1,24 +1,57 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>MIDI SoundFont Player</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Futuristic MIDI SoundFont Player</title>
+  <link rel="stylesheet" href="styles.css" />
+  <!-- Soundfont-player -->
+  <script src="https://unpkg.com/soundfont-player@0.15.0/dist/soundfont-player.min.js"></script>
+  <!-- @tonejs/midi (for MIDI parsing) -->
+  <script src="https://cdn.jsdelivr.net/npm/@tonejs/midi@2.3.2/build/Midi.min.js"></script>
 </head>
 <body>
+  <div class="app">
+    <header class="topbar">
+      <h1>NovaSF — MIDI SoundFont Player</h1>
+      <div class="controls">
+        <input id="fileInput" type="file" accept=".mid,.midi" />
+        <button id="playBtn" class="btn" disabled>Play</button>
+        <button id="pauseBtn" class="btn" disabled>Pause</button>
+        <label class="toggle">
+          <input id="loopToggle" type="checkbox" />
+          <span>Loop</span>
+        </label>
+      </div>
+    </header>
 
-<h2>MIDI SoundFont Player</h2>
+    <main class="main-grid">
+      <section class="visualizer-card">
+        <canvas id="oscilloscope"></canvas>
+        <div id="instrumentOverlay" class="overlay">
+          <!-- instrument badges injected here -->
+        </div>
+      </section>
 
-<input type="file" id="sf2" accept=".sf2">
-<input type="file" id="midi" accept=".mid,.midi">
+      <aside class="info-card">
+        <h2>Instruments detected</h2>
+        <div id="instrumentList" class="instrument-list">
+          <em>Drop a MIDI file to see instruments...</em>
+        </div>
 
-<div class="buttons">
-  <button id="play">Play</button>
-  <button id="pause">Pause</button>
-  <button id="stop">Stop</button>
-  <button id="loop">Loop: Off</button>
-</div>
+        <details class="panel">
+          <summary>How it works</summary>
+          <p>We parse the MIDI to detect program changes and note events. SoundFont samples are loaded per instrument and notes are scheduled via WebAudio. The oscilloscope shows the realtime waveform and highlights instruments when they play.</p>
+        </details>
+      </aside>
+    </main>
 
-<p id="instrument">Instrument: —</p>
+    <footer class="footer">
+      <small>Prototype • SoundFonts via soundfont-player • MIDI parsing via @tonejs/midi</small>
+    </footer>
+  </div>
 
-<canvas id="scope" width="600" height="
+  <script src="gm-instruments.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
