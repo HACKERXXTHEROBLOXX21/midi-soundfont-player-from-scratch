@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Futuristic MIDI SoundFont Player</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="style.css" />
   <!-- Soundfont-player (optional) -->
   <script src="https://unpkg.com/soundfont-player@0.15.0/dist/soundfont-player.min.js"></script>
   <!-- @tonejs/midi (for MIDI parsing) -->
@@ -17,10 +17,10 @@
     <header class="topbar">
       <h1>NovaSF — MIDI SoundFont Player</h1>
       <div class="controls">
-        <input id="sf2Input" type="file" accept=".sf2,.sf3" />
-        <input id="midiInput" type="file" accept=".mid,.midi" />
-        <button id="playBtn" class="btn" disabled>Play</button>
-        <button id="pauseBtn" class="btn" disabled>Pause</button>
+        <input id="sf2" type="file" accept=".sf2,.sf3" />
+        <input id="midi" type="file" accept=".mid,.midi" />
+        <button id="play" class="btn" disabled>Play</button>
+        <button id="pause" class="btn" disabled>Pause</button>
         <label class="toggle">
           <input id="loopToggle" type="checkbox" />
           <span>Loop</span>
@@ -52,7 +52,7 @@
     </footer>
   </div>
 
-  <script src="gm-instruments.js"></script>
-  <script src="app.js"></script>
+  <!-- Load the UI module (uses ES modules / imports) -->
+  <script type="module" src="ui.js"></script>
 </body>
 </html>
