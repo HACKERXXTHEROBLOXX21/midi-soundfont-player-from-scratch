@@ -5,17 +5,20 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Futuristic MIDI SoundFont Player</title>
   <link rel="stylesheet" href="styles.css" />
-  <!-- Soundfont-player -->
+  <!-- Soundfont-player (optional) -->
   <script src="https://unpkg.com/soundfont-player@0.15.0/dist/soundfont-player.min.js"></script>
   <!-- @tonejs/midi (for MIDI parsing) -->
   <script src="https://cdn.jsdelivr.net/npm/@tonejs/midi@2.3.2/build/Midi.min.js"></script>
+  <!-- pako (zlib/gzip) for .sf3 decompression support -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.1.0/pako.min.js"></script>
 </head>
 <body>
   <div class="app">
     <header class="topbar">
       <h1>NovaSF — MIDI SoundFont Player</h1>
       <div class="controls">
-        <input id="fileInput" type="file" accept=".mid,.midi" />
+        <input id="sf2Input" type="file" accept=".sf2,.sf3" />
+        <input id="midiInput" type="file" accept=".mid,.midi" />
         <button id="playBtn" class="btn" disabled>Play</button>
         <button id="pauseBtn" class="btn" disabled>Pause</button>
         <label class="toggle">
@@ -28,9 +31,7 @@
     <main class="main-grid">
       <section class="visualizer-card">
         <canvas id="oscilloscope"></canvas>
-        <div id="instrumentOverlay" class="overlay">
-          <!-- instrument badges injected here -->
-        </div>
+        <div id="instrumentOverlay" class="overlay"></div>
       </section>
 
       <aside class="info-card">
